@@ -1,8 +1,12 @@
 package AbstractDataStructure.MatrixADT;
 
 import javax.naming.SizeLimitExceededException;
+import java.util.Arrays;
+
 
 public class Matrix {
+
+    private int length;
 
     /**
      * Constructor, create a matrix with n rows m column, filled by 0
@@ -13,7 +17,17 @@ public class Matrix {
      * in that case the constructor will return a matrix with 1 row or 1 column.
      */
     public Matrix (int n, int m) throws IllegalArgumentException {
-
+        if (n < 0 && m < 0) {
+            throw new IllegalArgumentException();
+        }
+        float[][] matrix = new float[n][m];
+        length = matrix.length;
+        int cols = matrix[0].length;
+        for (int row = 0; row < length; row++) {
+            for (int col = 0; col < cols; col++) {
+                matrix[row][col] = 0;
+            }
+        }
     }
 
     /**
@@ -26,7 +40,17 @@ public class Matrix {
      * @throws SizeLimitExceededException if n < a.length
      */
     public Matrix (int n, int m, float[] a) throws IllegalArgumentException, SizeLimitExceededException {
-
+        if (n < 0 && m < 0) {
+            throw new IllegalArgumentException();
+        }
+        float[][] matrix = new float[n][m];
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        for (int row = 0; row < rows; row++) {
+            for (int col = 0; col < cols; col++) {
+                matrix[row][col] = a[col];
+            }
+        }
     }
 
     /**
@@ -38,5 +62,62 @@ public class Matrix {
      */
     public void insert (int i, int j, float x) throws IllegalArgumentException {
 
+    }
+
+    /**
+     * Method to multiply 2 matrices, return a new one
+     * @param m1 first matrix
+     * @param m2 second matrix
+     * @return a new matrix m3 that is the result of m1 * m2
+     * @throws InvalidMatrixDimension if the numbers of column of m1 != number of rows of m2
+     */
+//    public Matrix multiply (Matrix m1, Matrix m2) throws InvalidMatrixDimension {
+//
+//    }
+
+    /**
+     * Method to transpose a matrix so the rows and column gets swapped
+     * @param m the matrix to be transposed
+     */
+    public void transpose (Matrix m) {
+
+    }
+
+    /**
+     * Method to sum 2 matrices
+     * @param m1 first matrix
+     * @param m2 second matrix
+     * @return a new matrix m3 that is the sum m1 and m2 for every single cells
+     * @throws InvalidMatrixDimension if the numbers of column of m1 != number of rows of m2
+     */
+//    public Matrix add (Matrix m1, Matrix m2) throws InvalidMatrixDimension {
+//
+//    }
+
+    /**
+     * Method to multiply every elements of m by x
+     * @param x the terms to multiply
+     * @param m the matrix to apply the scalar product
+     */
+    public void scalarProduct (int x, Matrix m) {
+
+    }
+
+//    public void extractVector( , int i) {
+//
+//    }
+
+    public void toString(float[][] m) {
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[i].length; j++) {
+                System.out.print(m[i][j] + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void main(String[] args) {
+        Matrix m = new Matrix(3, 5);
+//        System.out.print(m.c);
     }
 }
