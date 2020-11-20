@@ -6,7 +6,7 @@ import java.util.Arrays;
 
 public class Matrix {
 
-    private int length;
+    float[][] matrix;
 
     /**
      * Constructor, create a matrix with n rows m column, filled by 0
@@ -20,10 +20,10 @@ public class Matrix {
         if (n < 0 && m < 0) {
             throw new IllegalArgumentException();
         }
-        float[][] matrix = new float[n][m];
-        length = matrix.length;
+        matrix = new float[n][m];
+        int rows = matrix.length;
         int cols = matrix[0].length;
-        for (int row = 0; row < length; row++) {
+        for (int row = 0; row < rows; row++) {
             for (int col = 0; col < cols; col++) {
                 matrix[row][col] = 0;
             }
@@ -107,10 +107,13 @@ public class Matrix {
 //
 //    }
 
-    public void toString(float[][] m) {
-        for (int i = 0; i < m.length; i++) {
-            for (int j = 0; j < m[i].length; j++) {
-                System.out.print(m[i][j] + " ");
+    /**
+     * Method to print the matrix
+     */
+    public void print () {
+        for (int i = 0; i < matrix.length; i++) {
+            for (int j = 0; j < matrix[i].length; j++) {
+                System.out.print(matrix[i][j] + ", ");
             }
             System.out.println();
         }
@@ -118,6 +121,6 @@ public class Matrix {
 
     public static void main(String[] args) {
         Matrix m = new Matrix(3, 5);
-//        System.out.print(m.c);
+        m.print();
     }
 }
