@@ -61,7 +61,11 @@ public class Matrix {
      * @throws IllegalArgumentException if i or j are out of bound
      */
     public void insert (int i, int j, float x) throws IllegalArgumentException {
-
+        try {
+            matrix[i][j] = x;
+        } catch (ArrayIndexOutOfBoundsException aiobe) {
+            throw new ArrayIndexOutOfBoundsException("the index inserted is out of bound");
+        }
     }
 
     /**
@@ -121,6 +125,7 @@ public class Matrix {
 
     public static void main(String[] args) {
         Matrix m = new Matrix(3, 5);
+        m.insert(1,1,1.2f);
         m.print();
     }
 }
