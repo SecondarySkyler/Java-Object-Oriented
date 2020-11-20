@@ -13,8 +13,6 @@ public class Matrix {
      * @param n number of rows. REQUIRE n > 0
      * @param m number of column. REQUIRE m > 0
      * @throws IllegalArgumentException if n or m are < 0
-     * n or m can't be 0 at the same time, but one can be 0 if the other is != 0,
-     * in that case the constructor will return a matrix with 1 row or 1 column.
      */
     public Matrix (int n, int m) throws IllegalArgumentException {
         if (n < 0 && m < 0) {
