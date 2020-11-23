@@ -37,31 +37,26 @@ public class Matrix {
      * @param n number of rows. REQUIRE n > 0
      * @param m number of column. REQUIRE m > 0
      * @param a the array of elements to use for filling the matrix
-     * @throws IllegalArgumentException if n <= 0
+     * @throws IllegalArgumentException if n or m are < 0
      */
     public Matrix (int n, int m, float[] a) throws IllegalArgumentException {
         if (n < 0 || m < 0) {
             throw new IllegalArgumentException();
         }
-        this.row = n;
-        this.col = m;
-        this.inLineMatrix = new float[n * m];
-        int inLineMatrixLength = inLineMatrix.length;
-//        int rows = matrix.length;
-//        int cols = matrix[0].length;
-//        for (int i = 0; i < inLineMatrixLength; i++) {
-//            for (int j = 0; j < a.length; j++) {
-//                inLineMatrix[i] = a[j];
-//                break;
-//            }
-//        }
-        int j = 0;
-        for (int i = 0; i < inLineMatrixLength; i++) {
-            if (j == a.length) {
-                j = 0;
+
+        matrix = new float[n][m];
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+
+        int z = 0;
+        for (int i = 0; i < rows; i++) {
+            for ( int j = 0; j < cols; j++) {
+                if (z == a.length)
+                    z = 0;
+                matrix[i][j] = a[z];
+                z++;
             }
-            inLineMatrix[i] = a[j];
-            j++;
+
             }
         }
 
@@ -137,25 +132,12 @@ public class Matrix {
         }
     }
 
-    public void print2() {
-        int j = 0;
-        int z = 0;
-        for (int i = 0; i < inLineMatrix.length; i++) {
-            if (z == this.col) {
-                System.out.println();
-                z = 0;
-            }
-            System.out.print(inLineMatrix[j] + ", ");
-            j++;
-            z++;
-        }
-    }
 
     public static void main(String[] args) {
         float[] a = {1.2f, 3.4f, 2.9f, 1.0f, 4.2f, 5.6f};
         Matrix m = new Matrix(3, 5, a);
 //        m.insert(1,1,1.2f);
-        m.print2();
+        m.print();
 
     }
 }
