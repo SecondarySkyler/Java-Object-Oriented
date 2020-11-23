@@ -7,6 +7,9 @@ import java.util.Arrays;
 public class Matrix {
 
     float[][] matrix;
+    float[] inLineMatrix;
+    int row;
+    int col;
 
     /**
      * Constructor, create a matrix with n rows m column, filled by 0
@@ -15,10 +18,10 @@ public class Matrix {
      * @throws IllegalArgumentException if n or m are < 0
      */
     public Matrix (int n, int m) throws IllegalArgumentException {
-        if (n < 0 && m < 0) {
+        if (n < 0 || m < 0) {
             throw new IllegalArgumentException();
         }
-        matrix = new float[n][m];
+        this.matrix = new float[n][m];
         int rows = matrix.length;
         int cols = matrix[0].length;
         for (int row = 0; row < rows; row++) {
@@ -35,21 +38,34 @@ public class Matrix {
      * @param m number of column. REQUIRE m > 0
      * @param a the array of elements to use for filling the matrix
      * @throws IllegalArgumentException if n <= 0
-     * @throws SizeLimitExceededException if n < a.length
      */
-    public Matrix (int n, int m, float[] a) throws IllegalArgumentException, SizeLimitExceededException {
-        if (n < 0 && m < 0) {
+    public Matrix (int n, int m, float[] a) throws IllegalArgumentException {
+        if (n < 0 || m < 0) {
             throw new IllegalArgumentException();
         }
-        float[][] matrix = new float[n][m];
-        int rows = matrix.length;
-        int cols = matrix[0].length;
-        for (int row = 0; row < rows; row++) {
-            for (int col = 0; col < cols; col++) {
-                matrix[row][col] = a[col];
+        this.row = n;
+        this.col = m;
+        this.inLineMatrix = new float[n * m];
+        int inLineMatrixLength = inLineMatrix.length;
+//        int rows = matrix.length;
+//        int cols = matrix[0].length;
+//        for (int i = 0; i < inLineMatrixLength; i++) {
+//            for (int j = 0; j < a.length; j++) {
+//                inLineMatrix[i] = a[j];
+//                break;
+//            }
+//        }
+        int j = 0;
+        for (int i = 0; i < inLineMatrixLength; i++) {
+            if (j == a.length) {
+                j = 0;
+            }
+            inLineMatrix[i] = a[j];
+            j++;
             }
         }
-    }
+
+
 
     /**
      * Method to insert x in the matrix in [i][j], MODIFY the matrix
@@ -121,9 +137,25 @@ public class Matrix {
         }
     }
 
+    public void print2() {
+        int j = 0;
+        int z = 0;
+        for (int i = 0; i < inLineMatrix.length; i++) {
+            if (z == this.col) {
+                System.out.println();
+                z = 0;
+            }
+            System.out.print(inLineMatrix[j] + ", ");
+            j++;
+            z++;
+        }
+    }
+
     public static void main(String[] args) {
-        Matrix m = new Matrix(3, 5);
-        m.insert(1,1,1.2f);
-        m.print();
+        float[] a = {1.2f, 3.4f, 2.9f, 1.0f, 4.2f, 5.6f};
+        Matrix m = new Matrix(3, 5, a);
+//        m.insert(1,1,1.2f);
+        m.print2();
+
     }
 }
