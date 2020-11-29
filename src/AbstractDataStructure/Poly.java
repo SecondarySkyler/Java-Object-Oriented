@@ -143,6 +143,26 @@ public class Poly {
 
     }
 
+    /**
+     *
+     * @return the result of symbolic differentiation of a poly
+     * @throws NegativeExponentException if p == null
+     */
+    public Poly differentiate() throws NegativeExponentException {
+        Objects.requireNonNull(this);
+        Poly q = new Poly();
+        try {
+            for (int i = 1; i <= this.degree(); i++) {
+                q = q.add(new Poly(this.coefficient(i) * i, i - 1));
+            }
+        } catch (NegativeExponentException nee) {
+            assert false : "this cannot happen";
+        }
+        return q;
+    }
+
+
+
     public String toString() {
         assert (this.terms != null);
         StringBuffer s = new StringBuffer();
