@@ -2,19 +2,19 @@ package Iterator;
 
 import java.util.*;
 
-public class IntSet_Iterator {
+public class IntSet {
 
     private Vector<Integer> elements;
 
     /** EFFECT; initialize this to a new set, empty. */
-    public IntSet_Iterator(){
+    public IntSet(){
         this.elements = new Vector<Integer>();
     }
 
     /** @param: elts. REQUIRE be not null.
     EFFECT initialize this to a new set, which contains each element
     of elts; duplicated elements are not considered. */
-    public IntSet_Iterator(int [] elts){
+    public IntSet(int [] elts){
         this.elements = new Vector<Integer>();
         Objects.requireNonNull(elts);
         for (int x:elts){
@@ -31,7 +31,7 @@ public class IntSet_Iterator {
      * @param s a set to be duplicated. REQUIRE not null
      */
     @SuppressWarnings("unchecked")
-    public IntSet_Iterator(IntSet_Iterator s) {
+    public IntSet(IntSet s) {
         Objects.requireNonNull(s);
         this.elements = (Vector<Integer>) s.elements.clone();
     }
@@ -96,12 +96,26 @@ public class IntSet_Iterator {
      * @param s2: REQUIRE not null
      * @return true if this and s2 contain the same set of int
      */
-    public boolean sameValues(IntSet_Iterator s2) {
+    public boolean sameValues(IntSet s2) {
         Objects.requireNonNull(s2);
         Collections.sort(this.elements);
         Collections.sort(s2.elements);
         boolean res = this.elements.equals(s2);
         return res;
+    }
+
+    /**
+     *
+     * @return a visualization of the set
+     */
+    public String toString() {
+        IntSetIterator it = new IntSetIterator(this);
+        StringBuffer sb = new StringBuffer();
+        while (it.hasNext()) {
+            Integer next = it.next();
+            sb = sb.append(next + ", ");
+        }
+        return sb.toString();
     }
 
     /**
@@ -119,7 +133,45 @@ public class IntSet_Iterator {
      */
 
 
-    private class IntSetIterator implements Iterator
+    private class IntSetIterator implements Iterator<Integer> {
+
+        private int current;
+        final private Vector<Integer> elements;
+
+        /**
+         * @param s an IntSet REQUIRE not null
+         * Initialize the iterator with the size of the vector and
+         * with current index=0, and store a copy of the elements.
+         */
+        IntSetIterator(IntSet s) {
+            Objects.requireNonNull(s);
+            this.elements = (Vector<Integer>) s.elements.clone();
+            this.current = 0;
+        }
+
+        @Override
+        public boolean hasNext() {
+            return this.current < this.elements.size();
+        }
+
+        @Override
+        public Integer next() {
+            if (this.current < this.elements.size()) {
+                Integer res = this.elements.get((int) this.current);
+                this.current++;
+                return res;
+            } else {
+                throw new NoSuchElementException("Went beyond the available values");
+            }
+        }
+
+        @Override
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+
+    }
 
 
 }
