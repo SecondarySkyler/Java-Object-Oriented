@@ -161,8 +161,70 @@ public class Poly {
         return q;
     }
 
+    /**
+     *
+     * @return the result of symbolic differentiation of a poly
+     * @throws NegativeExponentException if the exponent of a polynomial term is < 0
+     */
+    public Poly differentiate2() throws NegativeExponentException {
+        Objects.requireNonNull(this);
+        Poly result = new Poly();
+        Iterator<Poly> it = termIterator();
+        int index = 1;
+
+        while (it.hasNext()){
+            Poly next = it.next();
+            result = result.add(new Poly(next.coefficient(index) * index, index - 1));
+            index++;
+        }
+        return result;
+
+    }
 
 
+    /**
+     * It produces an iterator on this
+     * Allows the extraction of single terms of this, with a non zero coefficient
+     */
+    public Iterator<Poly> termIterator() {
+        Iterator<Poly> it = new Iterator<Poly>() {
+
+            private int index = 0;
+            @Override
+            public boolean hasNext() {
+                return index < terms.size() && terms.get(index) != null;
+            }
+
+            @Override
+            public Poly next() {
+                PolynomialTerm next = terms.get(index);
+                Poly result = null;
+                try {
+                    result = new Poly(next.coeff, next.exponent);
+                } catch (NegativeExponentException e) {
+                    e.printStackTrace();
+                }
+                index++;
+                return result;
+            }
+        };
+        return it;
+    }
+
+    /*
+    public void scan () {
+        Iterator<Poly> it = termIterator();
+        while (it.hasNext()) {
+            System.out.println(it.next().toString());
+        }
+    }
+    */
+
+
+    /**
+     *
+     * @return the poly written in form of a string
+     */
     public String toString() {
         assert (this.terms != null);
         StringBuffer s = new StringBuffer();

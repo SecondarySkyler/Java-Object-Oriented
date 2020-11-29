@@ -1,4 +1,5 @@
 package AbstractDataStructure;
+import java.util.Iterator;
 import java.util.Vector;
 
 public class PolyMain {
@@ -11,13 +12,15 @@ public class PolyMain {
         int ee = 1;
         Poly ce = new Poly(c, e); // 2x^2
         Poly cce = new Poly(cc, ee); // 3x^1
-        Poly copy = new Poly(ce);
-        System.out.println(ce.add(cce).toString()); //+3*x^1+2*x^2
-        System.out.println(ce.toString());
-        System.out.println(cce.toString());
-        System.out.println(ce.minus().toString());
-        Poly res = cce.differentiate(); //
-        System.out.print(res.toString());
+        Poly copy = new Poly();
+        copy = ce.add(cce);
+        Poly result = copy.differentiate2();
+        System.out.println(result.toString()); //+3*x^1+2*x^2
+//        System.out.println(ce.toString());
+//        System.out.println(cce.toString());
+//        System.out.println(ce.minus().toString());
+//        Poly res = cce.differentiate(); //
+//        System.out.print(res.toString());
 
 
 
