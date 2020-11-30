@@ -146,23 +146,27 @@ public class IntSet {
         IntSetIterator(IntSet s) {
             Objects.requireNonNull(s);
             this.elements = (Vector<Integer>) s.elements.clone();
-            this.current = 0;
+//            this.current = 0;
         }
 
         @Override
         public boolean hasNext() {
-            return this.current < this.elements.size();
+            return this.elements.size() > 0;
         }
 
         @Override
         public Integer next() {
-            if (this.current < this.elements.size()) {
-                Integer res = this.elements.get((int) this.current);
-                this.current++;
-                return res;
-            } else {
-                throw new NoSuchElementException("Went beyond the available values");
-            }
+            Integer next = Collections.min(this.elements);
+            this.elements.remove(next);
+            return next;
+
+//            if (this.current < this.elements.size()) {
+//                Integer res = this.elements.get((int) this.current);
+//                this.current++;
+//                return res;
+//            } else {
+//                throw new NoSuchElementException("Went beyond the available values");
+//            }
         }
 
         @Override
