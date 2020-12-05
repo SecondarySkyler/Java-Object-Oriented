@@ -52,7 +52,7 @@ public abstract class IntSetImpl implements IntSet{
     }
 
     public boolean remove( int x ) {
-        if (this.isIn(x)) {
+        if (!this.isIn(x)) {
             this.currentSize--;
             return true;
         }
