@@ -24,7 +24,23 @@ public class CarrieraUniversitaria {
         setVotoLaurea(votoLaurea);
     }
 
+    private void setVotoLaurea(int votoLaurea) {
+        this.votoLaurea = votoLaurea;
+    }
+
+    private void setDataLaurea(LocalDate dataLaurea) {
+        this.dataLaurea = dataLaurea;
+    }
+
+    private void setLaureato(boolean b) {
+        laureato = b;
+    }
+
     public Stream<Esame> stream() {
         return esami.stream();
+    }
+
+    public void setDataIscrizione(LocalDate data) {
+        dataIscrizione = data;
     }
 }
