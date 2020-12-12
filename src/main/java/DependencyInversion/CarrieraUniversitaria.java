@@ -33,7 +33,7 @@ public class CarrieraUniversitaria {
     }
 
     private void setLaureato(boolean b) {
-        laureato = b;
+        this.laureato = b;
     }
 
     public Stream<Esame> stream() {
