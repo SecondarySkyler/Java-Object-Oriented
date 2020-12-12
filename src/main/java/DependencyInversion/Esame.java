@@ -26,4 +26,20 @@ public class Esame implements Comparable{
             return 1;
         else return (corso.compareTo(es.corso));
     }
+
+    public Object getData() {
+        return data;
+    }
+
+    public Object getCorso() {
+        return corso;
+    }
+
+    public Object getVoto() {
+        return voto;
+    }
+
+    public Object isLode() {
+        return lode;
+    }
 }

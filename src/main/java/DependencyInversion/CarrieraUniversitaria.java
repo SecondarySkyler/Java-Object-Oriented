@@ -43,4 +43,16 @@ public class CarrieraUniversitaria {
     public void setDataIscrizione(LocalDate data) {
         dataIscrizione = data;
     }
+
+    public Object getDataIscrizione() {
+        return dataIscrizione;
+    }
+
+    public Object getDataLaurea() {
+        return dataLaurea;
+    }
+
+    public Object getVotoLaurea() {
+        return votoLaurea;
+    }
 }

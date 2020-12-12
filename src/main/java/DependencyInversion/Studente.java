@@ -44,4 +44,20 @@ public class Studente {
     public void laureati(LocalDate dataLaurea, int voto) {
         carriera.registraLaurea(dataLaurea, voto);
     }
+
+    public Object getNome() {
+        return nome;
+    }
+
+    public Object getCognome() {
+        return cognome;
+    }
+
+    public Object getMatricola() {
+        return matricola;
+    }
+
+    public CarrieraUniversitaria getCarriera() {
+        return this.carriera;
+    }
 }
